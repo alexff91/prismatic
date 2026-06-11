@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      Security posture: this app is fully static and talks ONLY to the
+      cluster endpoints the user configures. connect-src must stay open
+      because cluster URLs are user-supplied at runtime; everything else
+      is locked to self. No analytics, no CDNs, no fonts, no beacons.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src *; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Prismatic — browser-native console for Elasticsearch and OpenSearch. No backend, no telemetry, no install."
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>Prismatic — Elasticsearch &amp; OpenSearch console</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
