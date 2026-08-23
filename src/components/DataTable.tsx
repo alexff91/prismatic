@@ -41,31 +41,35 @@ export function DataTable<T>({ columns, rows, rowKey, onRowClick, initialSort }:
     }
   };
 
+  // The columns are nowrap by design, so on a narrow screen the table has to
+  // carry its own sideways scroll instead of widening the page.
   return (
-    <table className="data">
-      <thead>
-        <tr>
-          {columns.map((c) => (
-            <th key={c.key} onClick={() => onHeader(c.key)}>
-              {c.label}
-              {sortKey === c.key ? (sortDir === 1 ? ' ↑' : ' ↓') : ''}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {sorted.map((row) => (
-          <tr
-            key={rowKey(row)}
-            className={onRowClick ? 'clickable' : ''}
-            onClick={onRowClick ? () => onRowClick(row) : undefined}
-          >
+    <div className="table-scroll">
+      <table className="data">
+        <thead>
+          <tr>
             {columns.map((c) => (
-              <td key={c.key}>{c.render(row)}</td>
+              <th key={c.key} onClick={() => onHeader(c.key)}>
+                {c.label}
+                {sortKey === c.key ? (sortDir === 1 ? ' ↑' : ' ↓') : ''}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {sorted.map((row) => (
+            <tr
+              key={rowKey(row)}
+              className={onRowClick ? 'clickable' : ''}
+              onClick={onRowClick ? () => onRowClick(row) : undefined}
+            >
+              {columns.map((c) => (
+                <td key={c.key}>{c.render(row)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

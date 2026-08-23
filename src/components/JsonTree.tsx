@@ -16,7 +16,16 @@ import {
   type ChildSpan,
 } from '../lib/lazyjson/scanner';
 
-const ROW_HEIGHT = 22;
+/*
+ * Row height doubles on a phone. The caret is the only way to open a node,
+ * and inside a 22px row it is an 18x22 target — a mouse hits that, a thumb
+ * does not. The virtualiser measures everything from this one constant, so
+ * the offsets, the spacer and the visible window stay in step. Read once at
+ * module load: a phone does not cross this breakpoint mid-session.
+ */
+const TOUCH_LAYOUT =
+  typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
+const ROW_HEIGHT = TOUCH_LAYOUT ? 44 : 22;
 const OVERSCAN = 12;
 
 interface Row {

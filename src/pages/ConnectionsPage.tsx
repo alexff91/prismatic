@@ -68,7 +68,7 @@ export function ConnectionsPage() {
       <h1 className="page-title">Connections</h1>
 
       {connections.length > 0 && (
-        <div style={{ marginBottom: 24 }}>
+        <div style={{ marginBottom: 24 }} className="table-scroll">
           <table className="data">
             <thead>
               <tr>
