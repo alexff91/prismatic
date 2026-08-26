@@ -18,11 +18,245 @@
       name="description"
       content="Prismatic — browser-native console for Elasticsearch and OpenSearch. No backend, no telemetry, no install."
     />
+    <link rel="canonical" href="https://prismatic.alftech.space/" />
+    <meta name="robots" content="index, follow" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>Prismatic — Elasticsearch &amp; OpenSearch console</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="alftech" />
+    <meta property="og:title" content="Prismatic — Elasticsearch &amp; OpenSearch console" />
+    <meta
+      property="og:description"
+      content="Cluster health, nodes, indices, shards, a query builder and a REST console — as one page in your browser. You supply the cluster URL; requests go straight there, with no backend in between."
+    />
+    <meta property="og:url" content="https://prismatic.alftech.space/" />
+    <meta property="og:image" content="https://prismatic.alftech.space/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Prismatic's connection screen, with the Overview, Nodes, Indices, Shards, Search and REST Console rail" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Prismatic — Elasticsearch &amp; OpenSearch console" />
+    <meta
+      name="twitter:description"
+      content="Cluster health, nodes, indices, shards, a query builder and a REST console, in a browser tab. No backend, no telemetry, no install."
+    />
+    <meta name="twitter:image" content="https://prismatic.alftech.space/og.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Prismatic",
+        "url": "https://prismatic.alftech.space/",
+        "description": "A browser-native console for Elasticsearch and OpenSearch clusters. Shows cluster health, nodes, indices and shards, and carries a visual query builder and a REST console. The page is static files only: the browser talks to the cluster URL you enter, with no backend in between.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any modern browser",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "license": "https://opensource.org/licenses/MIT",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "featureList": [
+          "Cluster overview: health, nodes, documents, store size, JVM heap, shard states",
+          "Per-node heap, RAM, CPU, load and disk with an elected-master marker",
+          "Sortable index list with drilldown into mappings, settings and stats",
+          "Shard grid with cluster allocation explain on any shard",
+          "Visual query builder with field autocomplete from the live mapping",
+          "REST console for any method and endpoint, with a DELETE guard"
+        ]
+      }
+    </script>
+
+    <style>
+      /* The console is React and owns #root, which is exactly one viewport
+         tall. What follows is the page's own description, sitting below it.
+         Plain CSS on purpose - it must survive with the app's stylesheet
+         untouched. */
+      .about {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 3rem;
+        color: #8693ad;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.65;
+        border-top: 1px solid #232c40;
+      }
+      .about h2 {
+        color: #d7deee;
+        font-size: 18px;
+        line-height: 1.35;
+        font-weight: 600;
+        margin: 1.75rem 0 0.6rem;
+      }
+      .about h2:first-child {
+        margin-top: 0;
+      }
+      .about p {
+        margin: 0 0 0.85rem;
+      }
+      .about ul {
+        margin: 0 0 0.85rem;
+        padding-left: 1.15rem;
+      }
+      .about li {
+        margin-bottom: 0.45rem;
+      }
+      .about b {
+        color: #d7deee;
+        font-weight: 600;
+      }
+      .about code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
+          monospace;
+        font-size: 13px;
+        background: #141925;
+        border: 1px solid #232c40;
+        border-radius: 4px;
+        padding: 0.05rem 0.3rem;
+      }
+      .about .home {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: #00d4aa;
+      }
+      /* One quiet line to close the page: who made it, where the rest of them
+         live, and where to write when something here is wrong. The 44px
+         line-height gives every wrapped line a finger-sized box, so both links
+         stay tappable on a phone without the sentence becoming a row of
+         buttons. */
+      .about .colophon {
+        margin: 2rem 0 0;
+        padding-top: 1.1rem;
+        border-top: 1px solid #232c40;
+        font-size: 13.5px;
+        line-height: 44px;
+      }
+      .about .colophon a {
+        display: inline-block;
+        min-height: 44px;
+        color: #00d4aa;
+      }
+      .about .colophon .donate[hidden] {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <article class="about">
+      <h2>What this is</h2>
+      <p>
+        You need to look inside an Elasticsearch cluster, and standing up Kibana
+        for five queries is not worth the trouble. Prismatic is one page of
+        static files: you type the cluster URL, your browser talks to that
+        cluster directly, and you get the console.
+      </p>
+      <p>
+        It works against both Elasticsearch and OpenSearch — the distribution is
+        detected on connect, and everything it calls exists in both.
+      </p>
+
+      <h2>What it shows</h2>
+      <ul>
+        <li>
+          <b>Overview.</b> Cluster health, node count, documents, store size,
+          JVM heap, shard states and pending tasks, refreshing on its own.
+        </li>
+        <li>
+          <b>Nodes.</b> Heap, RAM, CPU, load and disk per node, with warning
+          thresholds and the elected master marked.
+        </li>
+        <li>
+          <b>Indices.</b> A sortable, filterable list; click through to
+          mappings, settings and stats.
+        </li>
+        <li>
+          <b>Shards.</b> A grid of primaries and replicas per index. Click a
+          shard to run <code>_cluster/allocation/explain</code> and read why it
+          sits where it does, or why it is unassigned.
+        </li>
+        <li>
+          <b>Search.</b> A query builder with AND / OR / NOT groups — match,
+          phrase, term, prefix, wildcard, exists, ranges, Lucene query strings —
+          with field names completed from the live mapping, a preview of the DSL
+          it generates, and a raw DSL mode when you want to write it yourself.
+        </li>
+        <li>
+          <b>REST console.</b> Any method against any endpoint, with the
+          diagnostic ones to hand (<code>_cat/*</code>, <code>_cluster/*</code>,
+          <code>_nodes/hot_threads</code>, <code>_tasks</code>, recovery,
+          templates), per-tab history, and a confirmation step before DELETE.
+        </li>
+      </ul>
+
+      <h2>Where your data goes</h2>
+      <p>
+        Nowhere except your cluster. There is no server component here, no
+        proxy, no analytics and no third-party asset — the page is HTML, CSS and
+        JavaScript served from this domain, and the content security policy in
+        it locks scripts to the same origin.
+      </p>
+      <p>
+        A saved connection keeps only its name and URL, in
+        <code>localStorage</code>. Credentials are never written there: they
+        live in memory, and the optional "remember for this tab" box puts them
+        in <code>sessionStorage</code>, which the browser clears when you close
+        the tab. Console history is per tab and goes the same way.
+      </p>
+
+      <h2>What you need first</h2>
+      <p>
+        Because the requests come from your browser rather than from a server,
+        the cluster has to allow cross-origin requests from this domain. The
+        connection screen has a <b>CORS setup help</b> button with the settings
+        for Elasticsearch and for OpenSearch. If you cannot change cluster
+        settings, the same files can be served from the cluster's own origin
+        behind your existing reverse proxy, and then no CORS is involved at all.
+      </p>
+      <p>
+        Basic auth and API keys are both supported. The source is MIT-licensed
+        and lives at
+        <a href="https://github.com/alexff91/prismatic">github.com/alexff91/prismatic</a>.
+      </p>
+
+      <p><a class="home" href="https://alftech.space/">More small tools →</a></p>
+
+      <!-- The address below is written with character references rather than
+           plain letters. A reader sees it in full and the mailto link opens
+           exactly as a hand-typed one would, but the regex an address harvester
+           runs over the raw page finds nothing to match. Which is also why this
+           comment does not spell the address out. -->
+      <p class="colophon">
+        Made by Aleksandr Fedorov at
+        <a href="https://alftech.space/">alftech.space</a>. The cluster URL, the
+        credentials and every request stay in this tab and go straight to your
+        cluster: nothing is proxied through a server of mine. If a screen
+        misreads your version of Elasticsearch or OpenSearch, or a number here
+        disagrees with the cluster, write to
+        <a href="mailto:a&#64;alftech&#46;space">a&#64;alftech&#46;space</a
+        ><span class="donate" hidden>
+          · <a rel="noopener">buy me a coffee</a></span
+        >
+      </p>
+    </article>
+
+    <script>
+      /* Donations are switched off: there is no account on any platform yet, so
+         there is no URL to send a reader to. Put that URL in DONATE_URL and the
+         line appears - that single edit is the whole switch. */
+      const DONATE_URL = '';
+      if (DONATE_URL) {
+        const slot = document.querySelector('.colophon .donate');
+        slot.querySelector('a').href = DONATE_URL;
+        slot.hidden = false;
+      }
+    </script>
   </body>
 </html>
